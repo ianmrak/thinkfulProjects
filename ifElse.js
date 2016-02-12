@@ -6,7 +6,7 @@ var pluralizer = function(noun, number) {
         console.log(number + " " + tempNoun);
         break;
       case "goose":
-        console.log(number + " " + tempNoun);
+        console.log(number + " " + "geese");
         break;
       case "deer":
         console.log(number + " " + tempNoun);
