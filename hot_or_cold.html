@@ -29,9 +29,6 @@
         else if (guess > 100 || guess < 1) {
           return console.log('Guess a number between 1 and 100');
         }
-        else if (avg < 3 && avg >= 1) {
-          console.log();
-        }
         else if (avg <= 5 && avg >= 1) {
           console.log('Red hot! Try again!');
         }
@@ -47,15 +44,18 @@
         else if (avg >= 50 && avg <= 100) {
           console.log('Ice cold...it must be a lot ' + direction);
         }
-    // doesn't work - still working on this //
-        else if (givenAnswers[givenAnswers.length - 1] < avg) {
-          console.log('Pssst...your last guess was closer');
-        }
+    /* doesn't work - still working on this
+     *   else if (givenAnswers[0] < avg) {
+     *    console.log('Pssst...your last guess was closer');
+     *  }
+     */
 
         givenAnswers.push(guess);
         numberGuesses++;
         return ("Numbers tried: " + givenAnswers.join(", ") + "\n" +
                 "Number of guesses: " + numberGuesses);
   }
+
+  submit();
 
 </script>
