@@ -1,72 +1,65 @@
 <script>
-
+  
   // global variables //
-  var randomNumber = Math.round(Math.random() * 100),
-      guess,
-      numberGuesses = 0,
-      givenAnswers = [],
-      oldAvg;
+    var randomNumber = Math.round(Math.random() * 100),
+        guess,
+        direction = guess > randomNumber ? "lower" : "higher",
+        numberGuesses = 0,
+        givenAnswers = [],
+        oldAvg;
+    // start new game //
+    var newGame = function() {
+      randomNumber = Math.round(Math.random() * 100);
+      return ('New game started! Pick a number between 1 and 100' + "\n" +
+                  "How to play: type \'guess = *number*\', hit enter, and then type submit()");
+    };
+    function submit(){
+    // calculates distance from number and which direction to go //
+          var avg = Math.abs(guess - randomNumber);
 
-  // start new game //
-  var newGame = function() {
-    randomNumber = Math.round(Math.random() * 100);
-    return ('New game started! Pick a number between 1 and 100' + "\n" +
-                "How to play: type \'guess = *number*\', hit enter, and then type submit()");
-  };
+    // game conditions //
+          if (guess === randomNumber) {
+            return 'You got it! If you want to play again, type newGame()';
+          }
+          else if (guess === undefined) {
+            return console.log('Guess a number between 1 and 100' + "\n" +
+                  "How to play: type \'guess = *number*\', hit enter, and then type submit()");
+          }
+          else if (guess > 100 || guess < 1) {
+            return console.log('Guess a number between 1 and 100');
+          }
+    // got it working! I need to use 'true' on the switch instead of 'avg'
+          switch(true) {
+            case (avg <= 5 && avg >= 1):
+              console.log('Red hot! Try again!');
+              break;
+            case (avg <= 10 && avg > 5):
+              console.log('Hot...try guessing a bit ' + direction);
+              break;
+            case (avg <= 25 && avg > 10):
+              console.log('Warm...try guessing ' + direction);
+              break;
+            case (avg <= 50 && avg > 25):
+              console.log('Cold...guess ' + direction);
+              break;
+            case (avg >= 50 && avg <= 100):
+              console.log('Ice cold...it must be a lot ' + direction);
+              break;
+            default:
+              console.log('Error');
+              break;
+          }
+    // indicates if the player is guessing the wrong direction //
+          if (oldAvg < avg) {
+            console.log('Pssst...your last guess was closer');
+          }
+          oldAvg = avg;
+          givenAnswers.push(guess);
+          numberGuesses++;
+          return ("Numbers tried: " + givenAnswers.join(", ") + "\n" +
+                  "Number of guesses: " + numberGuesses);
+    }
+    submit();
 
-  function submit(){
-  // calculates distance from number and which direction to go //
-        var avg = Math.abs(guess - randomNumber),
-            direction = guess > randomNumber ? "lower" : "higher";
-
-  // game conditions //
-        if (guess === randomNumber) {
-          return 'You got it! If you want to play again, type newGame()';
-        }
-        else if (guess === undefined) {
-          return console.log('Guess a number between 1 and 100' + "\n" +
-                "How to play: type \'guess = *number*\', hit enter, and then type submit()");
-        }
-        else if (guess > 100 || guess < 1) {
-          return console.log('Guess a number between 1 and 100');
-        }
-  // got it working! I need to use 'true' on the switch instead of 'avg'
-        switch(true) {
-          case (avg <= 5 && avg >= 1):
-            console.log('Red hot! Try again!');
-            break;
-
-          case (avg <= 10 && avg > 5):
-            console.log('Hot...try guessing a bit ' + direction);
-            break;
-
-          case (avg <= 25 && avg > 10):
-            console.log('Warm...try guessing ' + direction);
-            break;
-
-          case (avg <= 50 && avg > 25):
-            console.log('Cold...guess ' + direction);
-            break;
-
-          case (avg >= 50 && avg <= 100):
-            console.log('Ice cold...it must be a lot ' + direction);
-            break;
-          default:
-            console.log('Error');
-            break;
-        }
-  // indicates if the player is guessing the wrong direction //
-        if (oldAvg < avg) {
-          console.log('Pssst...your last guess was closer');
-        }
-
-        oldAvg = avg;
-        givenAnswers.push(guess);
-        numberGuesses++;
-        return ("Numbers tried: " + givenAnswers.join(", ") + "\n" +
-                "Number of guesses: " + numberGuesses);
-  }
-
-  submit();
 
 </script>
