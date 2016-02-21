@@ -1,10 +1,3 @@
-function inArray(array, element) {
-  for (var i = 0; i < array.length; i++) {
-    if ( array[i] === element ) return true;
-  }
-  return false;
-}
-
 function matchArray(obj, elementArray) {
   var objArr = Object.keys(obj);
   if (objArr.length !== elementArray.length) {
@@ -12,14 +5,19 @@ function matchArray(obj, elementArray) {
     return false;
   }
   for (var i = 0; i < objArr.length; i++) {
-    if (!inArray(elementArray, objArr[i])) {
+    var match;
+    for (var j = 0; j < elementArray.length; j++) {
+      if (elementArray[j] === objArr[i]) { match = true; }
+    }
+    if (!match) {
       console.log('false element');
       return false;
+    } else { match = undefined; }
     }
-  }
-  console.log('true');
+  console.log('arrays contain matching elements');
   return true;
-}
+  } 
+
 
 
 obj = {
